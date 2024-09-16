@@ -1,0 +1,48 @@
+name: dev-base
+
+services:
+  frontend:
+    build: ./frontend
+    container_name: dev-frontend
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "5173:5173"
+    networks:
+      - dev-net
+
+  backend:
+    build: ./backend
+    container_name: dev-backend
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3030:3030"
+    networks:
+      - dev-net
+    depends_on:
+      - database
+
+  database:
+    image: mariadb:latest
+    container_name: dev-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - dev-net
+
+networks:
+  dev-net:
+    driver: bridge
+
+volumes:
+  dbdata:

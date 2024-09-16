@@ -1,0 +1,20 @@
+{
+	"name": "Full Stack Dev Environment",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "backend",
+	"workspaceFolder": "/usr/src/app",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.shell.linux": "/bin/bash"
+			},
+			"extensions": [
+				"esbenp.prettier-vscode",
+				"dbaeumer.vscode-eslint",
+				"mhutchie.git-graph"
+			]
+		}
+	},
+	"postCreateCommand": "npm install",
+	"remoteUser": "node"
+}
