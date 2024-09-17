@@ -14,7 +14,7 @@ import {
 } from './books.schema.js'
 import { BookService, getOptions } from './books.class.js'
 import { bookPath, bookMethods } from './books.shared.js'
-import { searchHook } from '../../hooks/search.hooks.js'
+import { getGoogleBook } from '../../hooks/books-before.hooks.js'
 
 export * from './books.class.js'
 export * from './books.schema.js'
@@ -40,8 +40,8 @@ export const book = (app) => {
     before: {
       all: [schemaHooks.validateQuery(bookQueryValidator), schemaHooks.resolveQuery(bookQueryResolver)],
       find: [],
-      get: [searchHook], // Register the custom hook for the GET method
-      create: [schemaHooks.validateData(bookDataValidator), schemaHooks.resolveData(bookDataResolver)],
+      get: [],
+      create: [getGoogleBook, schemaHooks.validateData(bookDataValidator), schemaHooks.resolveData(bookDataResolver)],
       patch: [schemaHooks.validateData(bookPatchValidator), schemaHooks.resolveData(bookPatchResolver)],
       remove: []
     },

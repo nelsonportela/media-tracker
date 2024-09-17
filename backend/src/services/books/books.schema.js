@@ -6,11 +6,26 @@ import { dataValidator, queryValidator } from '../../validators.js'
 export const bookSchema = {
   $id: 'Book',
   type: 'object',
-  additionalProperties: false,
-  required: ['id', 'text'],
+  // additionalProperties: false,
+  // required: ['googleVolumeId', 'title'],
   properties: {
-    id: { type: 'number' },
-    text: { type: 'string' }
+    googleVolumeId: { type: 'string' },
+    title: { type: 'string' },
+  //   subtitle: { type: 'string' },
+  //   authors: { 
+  //     type: 'array',
+  //     items: { type: 'string' }
+  //   },
+  //   publisher: { type: 'string' },
+  //   publishedDate: { type: 'string', format: 'date' },
+  //   description: { type: 'string' },
+  //   printedPageCount: { type: 'number' },
+  //   categories: { 
+  //     type: 'array',
+  //     items: { type: 'string' }
+  //   },
+  //   thumbnail: { type: 'string' },
+  //   previewLink: { type: 'string' },
   }
 }
 export const bookValidator = getValidator(bookSchema, dataValidator)
@@ -22,8 +37,8 @@ export const bookExternalResolver = resolve({})
 export const bookDataSchema = {
   $id: 'BookData',
   type: 'object',
-  additionalProperties: false,
-  required: ['text'],
+  // additionalProperties: false,
+  required: ['googleVolumeId','title'],
   properties: {
     ...bookSchema.properties
   }
