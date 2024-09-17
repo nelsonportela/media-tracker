@@ -14,6 +14,7 @@ import { configurationValidator } from './configuration.js'
 import { logger } from './logger.js'
 import { logError } from './hooks/log-error.js'
 import { mysql } from './mysql.js'
+import { authentication } from './authentication.js'
 import { services } from './services/index.js'
 
 const app = express(feathers())
@@ -30,6 +31,8 @@ app.use('/', serveStatic(app.get('public')))
 app.configure(rest())
 
 app.configure(mysql)
+
+app.configure(authentication)
 
 app.configure(services)
 

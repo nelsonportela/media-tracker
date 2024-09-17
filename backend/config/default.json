@@ -16,7 +16,28 @@
       "port": 3306,
       "user": "root",
       "password": "rootpassword",
-      "database": "mydb"
+      "database": "tracker"
+    }
+  },
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "/72Y3L+9X2lTBWDG3gBxSAtlT3ky7yes",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
     }
   }
 }

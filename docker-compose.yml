@@ -30,7 +30,7 @@ services:
     container_name: dev-db
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: mydb
+      MYSQL_DATABASE: tracker
       MYSQL_USER: user
       MYSQL_PASSWORD: userpassword
     ports:
