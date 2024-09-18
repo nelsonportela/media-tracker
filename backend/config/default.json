@@ -14,15 +14,15 @@
     "connection": {
       "host": "dev-db",
       "port": 3306,
-      "user": "${MYSQL_USER}",
-      "password": "${MYSQL_PASSWORD}",
-      "database": "${MYSQL_DATABASE}"
+      "user": "MYSQL_USER",
+      "password": "MYSQL_PASSWORD",
+      "database": "MYSQL_DATABASE"
     }
   },
   "authentication": {
     "entity": "user",
     "service": "users",
-    "secret": "${AUTH_SECRET}",
+    "secret": "AUTH_SECRET",
     "authStrategies": [
       "jwt",
       "local"

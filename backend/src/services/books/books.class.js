@@ -12,11 +12,6 @@ export class BookService extends KnexService {
    * @param {Object} params - Additional parameters for the remove operation.
    * @returns {Promise<Object>} The patched book data with the deletedAt field set.
    */
-  async remove(id, params) {
-    // Set the deletedAt field to the current date-time
-    const data = { deletedAt: DateTime.now().toFormat('yyyy-MM-dd HH:mm:ss') };
-    return this.patch(id, data, params);
-  }
 }
 
 /**

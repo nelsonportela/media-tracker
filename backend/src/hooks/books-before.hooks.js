@@ -4,7 +4,8 @@ export const getGoogleBook = async (context) => {
     delete context.data.volumeId;
 
     if (!volumeId) {
-      throw new Error('Volume ID is required');
+      // throw new Error('Volume ID is required');
+      return context;
     }
 
     // Make an internal request to the get method of the google-books service

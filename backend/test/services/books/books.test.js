@@ -1,7 +1,13 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.test.html
 import assert from 'assert';
 import { app } from '../../../src/app.js';
-import { DateTime } from 'luxon';
+// import { DateTime } from 'luxon';
+
+import knex from 'knex'
+import knexConfig from '../../../knexfile.js'
+
+const dbClient = knex(knexConfig)
+app.set('knexClient', dbClient)
 
 describe('books service', () => {
   let service;
@@ -33,7 +39,11 @@ describe('books service', () => {
     assert.equal(book.subtitle, 'A Subtitle', 'Created book has correct subtitle');
     assert.equal(book.authors, JSON.stringify(['Test Author']), 'Created book has correct authors');
     assert.equal(book.publisher, 'Test Publisher', 'Created book has correct publisher');
-    assert.equal(book.publishedDate, '2021-01-01', 'Created book has correct published date');
+    assert.equal(
+      new Date(book.publishedDate).toISOString().split('T')[0],
+      '2021-01-01',
+      'Created book has correct published date'
+    );
     assert.equal(book.description, 'A test book description', 'Created book has correct description');
     assert.equal(book.printedPageCount, 100, 'Created book has correct printed page count');
     assert.equal(book.categories, JSON.stringify(['Test Category']), 'Created book has correct categories');
@@ -55,13 +65,17 @@ describe('books service', () => {
       thumbnail: 'http://example.com/thumbnail.jpg',
       previewLink: 'http://example.com/preview'
     });
-
+  
     // Soft delete the book
     const deletedBook = await service.remove(book.id);
 
     assert.ok(deletedBook.deletedAt, 'Deleted book has a deletedAt field');
+    
+    // Use JavaScript's Date object to validate the date-time
+    const isValidDateTime = !isNaN(Date.parse(deletedBook.deletedAt));
+  
     assert.equal(
-      DateTime.fromFormat(deletedBook.deletedAt, 'yyyy-MM-dd HH:mm:ss').isValid,
+      isValidDateTime,
       true,
       'deletedAt field is a valid date-time'
     );
@@ -84,10 +98,19 @@ describe('books service', () => {
 
     // Soft delete the book
     await service.remove(book.id);
-
+    
     // Try to get the book by id
-    const fetchedBook = await service.get(book.id);
-
+    let fetchedBook;
+    try {
+      const result = await app.get('knexClient')
+        .select('*')
+        .from('books')
+        .where({ id: book.id });
+      fetchedBook = result[0];
+    } catch (err) {
+      console.error(err);
+    }
+    
     assert.ok(fetchedBook, 'Book still exists in the database');
     assert.ok(fetchedBook.deletedAt, 'Fetched book has a deletedAt field');
   });

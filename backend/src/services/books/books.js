@@ -14,6 +14,8 @@ import {
 import { BookService, getOptions } from './books.class.js'
 import { bookPath, bookMethods } from './books.shared.js'
 import { getGoogleBook } from '../../hooks/books-before.hooks.js'
+import { softDelete } from 'feathers-hooks-common';
+import { DateTime } from 'luxon';
 
 export * from './books.class.js'
 export * from './books.schema.js'
@@ -40,18 +42,22 @@ export const book = (app) => {
       all: [
         schemaHooks.validateQuery(bookQueryValidator), 
         schemaHooks.resolveQuery(bookQueryResolver),
-        async context => {
-          // Add condition to filter out soft deleted records
-          if (!context.params.query) {
-            context.params.query = {}
+        softDelete({
+          deletedQuery: async context => {
+            return { deletedAt: null };
+          },
+          removeData: async context => {
+            return { deletedAt: DateTime.now().toFormat('yyyy-MM-dd HH:mm:ss') };
           }
-          context.params.query.deletedAt = { $eq: null }
-          return context
-        }
+        })
       ],
       find: [],
       get: [],
-      create: [getGoogleBook, schemaHooks.validateData(bookDataValidator), schemaHooks.resolveData(bookDataResolver)],
+      create: [
+        getGoogleBook, 
+        schemaHooks.validateData(bookDataValidator), 
+        schemaHooks.resolveData(bookDataResolver)
+      ],
       patch: [schemaHooks.validateData(bookPatchValidator), schemaHooks.resolveData(bookPatchResolver)],
       remove: []
     },
