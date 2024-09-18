@@ -1,11 +1,11 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/client.html
 import { feathers } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
-export {}
+// Import the necessary clients
+import {userClient} from './services/users/users.shared.js'
+import {bookClient} from './services/books/books.shared.js'
+import {googleBooksClient} from './services/google-books/google-books.shared.js'
 
-export {}
-
-export {}
 
 /**
  * Returns a  client for the backend app.

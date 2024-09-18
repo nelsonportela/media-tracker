@@ -43,10 +43,7 @@
     "bundle:client": "npm pack --pack-destination ./public",
     "migrate": "knex migrate:latest",
     "migrate:make": "knex migrate:make -x mjs",
-    "migrate:rollback": "knex migrate:rollback",
-    "migrate:up": "knex migrate:up",
-    "migrate:down": "knex migrate:down",
-    "migrate:list": "knex migrate:list"
+    "docs": "jsdoc -r -c jsdoc.json"
   },
   "dependencies": {
     "@feathersjs/adapter-commons": "^5.0.30",
@@ -73,6 +70,7 @@
     "@feathersjs/rest-client": "^5.0.30",
     "axios": "^1.7.7",
     "cross-env": "^7.0.3",
+    "jsdoc": "^4.0.3",
     "mocha": "^10.7.3",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3"

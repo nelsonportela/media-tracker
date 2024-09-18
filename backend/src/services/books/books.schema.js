@@ -31,7 +31,7 @@ export const bookDataSchema = {
   $id: 'BookData',
   type: 'object',
   additionalProperties: false,
-  required: ['googleVolumeId','title'],
+  required: ['title'],
   properties: {
     ...bookSchema.properties,
     googleVolumeId: { type: 'string' }
