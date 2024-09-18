@@ -6,26 +6,19 @@ import { dataValidator, queryValidator } from '../../validators.js'
 export const bookSchema = {
   $id: 'Book',
   type: 'object',
-  // additionalProperties: false,
-  // required: ['googleVolumeId', 'title'],
+  additionalProperties: false,
+  required: [],
   properties: {
-    googleVolumeId: { type: 'string' },
     title: { type: 'string' },
-  //   subtitle: { type: 'string' },
-  //   authors: { 
-  //     type: 'array',
-  //     items: { type: 'string' }
-  //   },
-  //   publisher: { type: 'string' },
-  //   publishedDate: { type: 'string', format: 'date' },
-  //   description: { type: 'string' },
-  //   printedPageCount: { type: 'number' },
-  //   categories: { 
-  //     type: 'array',
-  //     items: { type: 'string' }
-  //   },
-  //   thumbnail: { type: 'string' },
-  //   previewLink: { type: 'string' },
+    subtitle: { type: 'string' },
+    authors: { type: 'string' }, // Define as string since it's stored as JSON string
+    publisher: { type: 'string' },
+    publishedDate: { type: 'string', format: 'date' },
+    description: { type: 'string' },
+    printedPageCount: { type: 'number' },
+    categories: { type: 'string' }, // Define as string since it's stored as JSON string
+    thumbnail: { type: 'string' },
+    previewLink: { type: 'string' },
   }
 }
 export const bookValidator = getValidator(bookSchema, dataValidator)
@@ -37,10 +30,11 @@ export const bookExternalResolver = resolve({})
 export const bookDataSchema = {
   $id: 'BookData',
   type: 'object',
-  // additionalProperties: false,
+  additionalProperties: false,
   required: ['googleVolumeId','title'],
   properties: {
-    ...bookSchema.properties
+    ...bookSchema.properties,
+    googleVolumeId: { type: 'string' }
   }
 }
 export const bookDataValidator = getValidator(bookDataSchema, dataValidator)
@@ -53,7 +47,8 @@ export const bookPatchSchema = {
   additionalProperties: false,
   required: [],
   properties: {
-    ...bookSchema.properties
+    ...bookSchema.properties,
+    deletedAt: {}
   }
 }
 export const bookPatchValidator = getValidator(bookPatchSchema, dataValidator)
@@ -63,9 +58,10 @@ export const bookPatchResolver = resolve({})
 export const bookQuerySchema = {
   $id: 'BookQuery',
   type: 'object',
-  // additionalProperties: false,
+  additionalProperties: false,
   properties: {
-    ...querySyntax(bookSchema.properties)
+    ...querySyntax(bookSchema.properties),
+    deletedAt: {}
   }
 }
 export const bookQueryValidator = getValidator(bookQuerySchema, queryValidator)

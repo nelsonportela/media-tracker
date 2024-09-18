@@ -15,12 +15,12 @@ export const getGoogleBook = async (context) => {
       const {
         title,
         subtitle,
-        // authors,
+        authors,
         publisher,
         publishedDate,
         description,
         printedPageCount,
-        // categories,
+        categories,
         imageLinks
       } = volumeInfo || {};
 
@@ -29,14 +29,12 @@ export const getGoogleBook = async (context) => {
         googleVolumeId: id,
         title,
         subtitle,
-        // authors: Array.isArray(authors) ? authors : [], // Ensure authors is an array
-        authors:'',
+        authors: JSON.stringify(authors), // Convert authors array to JSON string
         publisher,
         publishedDate,
         description: description ? description.replace(/'/g, "''") : '', // Escape single quotes in description
         printedPageCount,
-        categories:'',
-        // categories: Array.isArray(categories) ? categories : [], // Ensure categories is an array
+        categories: JSON.stringify(categories), // Convert categories array to JSON string
         thumbnail: imageLinks?.thumbnail,
         previewLink: `https://www.google.co.uk/books/edition/_/${id}`
       };

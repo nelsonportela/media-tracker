@@ -1,6 +1,5 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.html
 import { authenticate } from '@feathersjs/authentication'
-
 import { hooks as schemaHooks } from '@feathersjs/schema'
 import {
   bookDataValidator,
@@ -38,7 +37,18 @@ export const book = (app) => {
       ]
     },
     before: {
-      all: [schemaHooks.validateQuery(bookQueryValidator), schemaHooks.resolveQuery(bookQueryResolver)],
+      all: [
+        schemaHooks.validateQuery(bookQueryValidator), 
+        schemaHooks.resolveQuery(bookQueryResolver),
+        async context => {
+          // Add condition to filter out soft deleted records
+          if (!context.params.query) {
+            context.params.query = {}
+          }
+          context.params.query.deletedAt = { $eq: null }
+          return context
+        }
+      ],
       find: [],
       get: [],
       create: [getGoogleBook, schemaHooks.validateData(bookDataValidator), schemaHooks.resolveData(bookDataResolver)],
