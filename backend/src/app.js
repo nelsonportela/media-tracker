@@ -16,6 +16,8 @@ import { logError } from './hooks/log-error.js'
 import { mysql } from './mysql.js'
 import { authentication } from './authentication.js'
 import { services } from './services/index.js'
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express(feathers())
 
