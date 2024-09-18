@@ -5,6 +5,13 @@
   },
   "host": "HOSTNAME",
   "authentication": {
-    "secret": "FEATHERS_SECRET"
+    "secret": "AUTH_SECRET"
+  },
+  "mysql": {
+    "connection": {
+      "user": "MYSQL_USER",
+      "password": "MYSQL_PASSWORD",
+      "database": "MYSQL_DATABASE"
+    }
   }
 }
