@@ -1,6 +1,6 @@
 export const bookPath = 'books'
 
-export const bookMethods = ['find', 'get', 'create', 'patch', 'remove']
+export const bookMethods = ['find', 'get', 'create', 'patch']
 
 export const bookClient = (client) => {
   const connection = client.get('connection')

@@ -13,12 +13,12 @@ export const bookSchema = {
     subtitle: { type: 'string' },
     authors: { type: 'string' }, // Define as string since it's stored as JSON string
     publisher: { type: 'string' },
-    publishedDate: { type: 'string', format: 'date' },
+    published_date: { type: 'string', format: 'date' },
     description: { type: 'string' },
-    printedPageCount: { type: 'number' },
+    printed_page_count: { type: 'number' },
     categories: { type: 'string' }, // Define as string since it's stored as JSON string
     thumbnail: { type: 'string' },
-    previewLink: { type: 'string' },
+    preview_link: { type: 'string' },
   }
 }
 export const bookValidator = getValidator(bookSchema, dataValidator)
@@ -34,7 +34,7 @@ export const bookDataSchema = {
   required: ['title'],
   properties: {
     ...bookSchema.properties,
-    googleVolumeId: { type: 'string' }
+    google_volume_id: { type: 'string' }
   }
 }
 export const bookDataValidator = getValidator(bookDataSchema, dataValidator)
@@ -48,7 +48,6 @@ export const bookPatchSchema = {
   required: [],
   properties: {
     ...bookSchema.properties,
-    deletedAt: {}
   }
 }
 export const bookPatchValidator = getValidator(bookPatchSchema, dataValidator)
@@ -61,7 +60,6 @@ export const bookQuerySchema = {
   additionalProperties: false,
   properties: {
     ...querySyntax(bookSchema.properties),
-    deletedAt: {}
   }
 }
 export const bookQueryValidator = getValidator(bookQuerySchema, queryValidator)

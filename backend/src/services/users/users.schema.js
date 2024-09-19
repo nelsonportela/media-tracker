@@ -12,7 +12,8 @@ export const userSchema = {
   properties: {
     id: { type: 'number' },
     email: { type: 'string' },
-    password: { type: 'string' }
+    password: { type: 'string' },
+    name: { type: 'string' }
   }
 }
 export const userValidator = getValidator(userSchema, dataValidator)

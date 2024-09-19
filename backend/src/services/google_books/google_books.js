@@ -1,9 +1,9 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.html
 import { authenticate } from '@feathersjs/authentication'
-import { GoogleBooksService, getOptions } from './google-books.class.js'
-import { googleBooksPath, googleBooksMethods } from './google-books.shared.js'
+import { GoogleBooksService, getOptions } from './google_books.class.js'
+import { googleBooksPath, googleBooksMethods } from './google_books.shared.js'
 
-export * from './google-books.class.js'
+export * from './google_books.class.js'
 
 // A configure function that registers the service and its hooks via `app.configure`
 export const googleBooks = (app) => {

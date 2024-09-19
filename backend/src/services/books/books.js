@@ -1,6 +1,8 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.html
 import { authenticate } from '@feathersjs/authentication'
 import { hooks as schemaHooks } from '@feathersjs/schema'
+// Import feathers-knex hooks
+import { transaction } from '@feathersjs/knex'
 import {
   bookDataValidator,
   bookPatchValidator,
@@ -13,8 +15,8 @@ import {
 } from './books.schema.js'
 import { BookService, getOptions } from './books.class.js'
 import { bookPath, bookMethods } from './books.shared.js'
-import { getGoogleBook } from '../../hooks/books-before.hooks.js'
-import { softDelete } from 'feathers-hooks-common';
+import { getGoogleBook, setUserItem } from '../../hooks/books.hooks.js'
+import { softDelete, disallow } from 'feathers-hooks-common';
 import { DateTime } from 'luxon';
 
 export * from './books.class.js'
@@ -36,7 +38,8 @@ export const book = (app) => {
         authenticate('jwt'),
         schemaHooks.resolveExternal(bookExternalResolver),
         schemaHooks.resolveResult(bookResolver)
-      ]
+      ],
+      remove: [disallow()]
     },
     before: {
       all: [
@@ -44,16 +47,17 @@ export const book = (app) => {
         schemaHooks.resolveQuery(bookQueryResolver),
         softDelete({
           deletedQuery: async context => {
-            return { deletedAt: null };
+            return { deleted_at: null };
           },
           removeData: async context => {
-            return { deletedAt: DateTime.now().toFormat('yyyy-MM-dd HH:mm:ss') };
+            return { deleted_at: DateTime.now().toFormat('yyyy-MM-dd HH:mm:ss') };
           }
         })
       ],
       find: [],
       get: [],
       create: [
+        transaction.start(),
         getGoogleBook, 
         schemaHooks.validateData(bookDataValidator), 
         schemaHooks.resolveData(bookDataResolver)
@@ -62,10 +66,12 @@ export const book = (app) => {
       remove: []
     },
     after: {
-      all: []
+      all: [],
+      create: [setUserItem,transaction.end()],
     },
     error: {
-      all: []
+      all: [],
+      create: [transaction.rollback()],
     }
   })
 }

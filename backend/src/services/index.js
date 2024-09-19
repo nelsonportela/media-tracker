@@ -1,7 +1,10 @@
-import { googleBooks } from './google-books/google-books.js'
+import { userItemStatus } from './user_item/user_item.js'
+import { googleBooks } from './google_books/google_books.js'
 import { book } from './books/books.js'
 import { user } from './users/users.js'
 export const services = (app) => {
+  app.configure(userItemStatus)
+
   app.configure(googleBooks)
 
   app.configure(book)

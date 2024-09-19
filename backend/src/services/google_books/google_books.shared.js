@@ -1,4 +1,4 @@
-export const googleBooksPath = 'google-books'
+export const googleBooksPath = 'google_books'
 
 export const googleBooksMethods = ['find', 'get',]
 

@@ -3,6 +3,7 @@ export async function up(knex) {
     table.increments('id')
     table.string('email').unique()
     table.string('password')
+    table.string('name')
   })
 }
 
