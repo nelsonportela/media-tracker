@@ -3,8 +3,8 @@ import { resolve, getValidator, querySyntax } from '@feathersjs/schema'
 import { dataValidator, queryValidator } from '../../validators.js'
 
 // Main data model schema
-export const userItemStatusSchema = {
-  $id: 'UserItemStatus',
+export const userItemSchema = {
+  $id: 'UserItem',
   type: 'object',
   additionalProperties: false,
   required: [],
@@ -16,47 +16,47 @@ export const userItemStatusSchema = {
     status_id: { type: 'number' }
   }
 }
-export const userItemStatusValidator = getValidator(userItemStatusSchema, dataValidator)
-export const userItemStatusResolver = resolve({})
+export const userItemValidator = getValidator(userItemSchema, dataValidator)
+export const userItemResolver = resolve({})
 
-export const userItemStatusExternalResolver = resolve({})
+export const userItemExternalResolver = resolve({})
 
 // Schema for creating new data
-export const userItemStatusDataSchema = {
-  $id: 'UserItemStatusData',
+export const userItemDataSchema = {
+  $id: 'UserItemData',
   type: 'object',
   additionalProperties: false,
   required: ['status_id'],
   properties: {
-    ...userItemStatusSchema.properties
+    ...userItemSchema.properties
   }
 }
-export const userItemStatusDataValidator = getValidator(userItemStatusDataSchema, dataValidator)
-export const userItemStatusDataResolver = resolve({})
+export const userItemDataValidator = getValidator(userItemDataSchema, dataValidator)
+export const userItemDataResolver = resolve({})
 
 // Schema for updating existing data
-export const userItemStatusPatchSchema = {
-  $id: 'UserItemStatusPatch',
+export const userItemPatchSchema = {
+  $id: 'UserItemPatch',
   type: 'object',
   additionalProperties: false,
   required: [],
   properties: {
-    ...userItemStatusSchema.properties,
+    ...userItemSchema.properties,
     deleted_at: {}
   }
 }
-export const userItemStatusPatchValidator = getValidator(userItemStatusPatchSchema, dataValidator)
-export const userItemStatusPatchResolver = resolve({})
+export const userItemPatchValidator = getValidator(userItemPatchSchema, dataValidator)
+export const userItemPatchResolver = resolve({})
 
 // Schema for allowed query properties
-export const userItemStatusQuerySchema = {
-  $id: 'UserItemStatusQuery',
+export const userItemQuerySchema = {
+  $id: 'UserItemQuery',
   type: 'object',
   additionalProperties: false,
   properties: {
-    ...querySyntax(userItemStatusSchema.properties),
+    ...querySyntax(userItemSchema.properties),
     deleted_at: {}
   }
 }
-export const userItemStatusQueryValidator = getValidator(userItemStatusQuerySchema, queryValidator)
-export const userItemStatusQueryResolver = resolve({})
+export const userItemQueryValidator = getValidator(userItemQuerySchema, queryValidator)
+export const userItemQueryResolver = resolve({})

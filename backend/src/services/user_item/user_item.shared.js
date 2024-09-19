@@ -1,11 +1,11 @@
-export const userItemStatusPath = 'user_item'
+export const userItemPath = 'user_item'
 
-export const userItemStatusMethods = ['find', 'get', 'create', 'patch', 'remove']
+export const userItemMethods = ['find', 'get', 'create', 'patch', 'remove']
 
 export const userItemClient = (client) => {
   const connection = client.get('connection')
 
-  client.use(userItemStatusPath, connection.service(userItemStatusPath), {
-    methods: userItemStatusMethods
+  client.use(userItemPath, connection.service(userItemPath), {
+    methods: userItemMethods
   })
 }
