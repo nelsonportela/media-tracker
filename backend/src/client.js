@@ -7,6 +7,7 @@ export {}
 import { userClient } from './services/users/users.shared.js'
 import { bookClient } from './services/books/books.shared.js'
 import { googleBooksClient } from './services/google_books/google_books.shared.js'
+import { userItemClient } from './services/user_item/user_item.shared.js'
 
 /**
  * Returns a  client for the backend app.
@@ -29,7 +30,7 @@ export const createClient = (connection, authenticationOptions = {}) => {
 
   client.configure(googleBooksClient)
 
-  client.configure(userItemStatusClient)
+  client.configure(userItemClient)
 
   return client
 }

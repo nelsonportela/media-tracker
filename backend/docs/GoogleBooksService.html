@@ -95,7 +95,7 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">object</span>
 
 
             
@@ -146,7 +146,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_google_books_google_books.class.js.html">services/google_books/google_books.class.js</a>, <a href="services_google_books_google_books.class.js.html#line8">line 8</a>
+        <a href="src_services_google_books_google_books.class.js.html">src/services/google_books/google_books.class.js</a>, <a href="src_services_google_books_google_books.class.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -209,7 +209,7 @@
     
 
     
-    <h4 class="name" id="find"><span class="type-signature">(async) </span>find<span class="signature">(context, _params)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+    <h4 class="name" id="find"><span class="type-signature">(async) </span>find<span class="signature">(context, _params)</span><span class="type-signature"> &rarr; {Promise.&lt;object>}</span></h4>
     
 
     
@@ -217,7 +217,7 @@
 
 
 <div class="description">
-    Finds books based on the provided query.
+    Searches for books by title using the Google Books API.
 </div>
 
 
@@ -259,7 +259,7 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">object</span>
 
 
             
@@ -269,7 +269,238 @@
 
             
 
-            <td class="description last">The context containing the query.</td>
+            <td class="description last">The context object containing the query parameters.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>query</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The query parameters.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">The title of the book to search for.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>startIndex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">The index of the first result to return.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maxResults</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    10
+                
+                </td>
+            
+
+            <td class="description last">The maximum number of results to return.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>orderBy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    'relevance'
+                
+                </td>
+            
+
+            <td class="description last">The order in which to return results.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -282,7 +513,7 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">object</span>
 
 
             
@@ -292,7 +523,7 @@
 
             
 
-            <td class="description last">Additional parameters (unused).</td>
+            <td class="description last">Additional parameters.</td>
         </tr>
 
     
@@ -333,7 +564,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_google_books_google_books.class.js.html">services/google_books/google_books.class.js</a>, <a href="services_google_books_google_books.class.js.html#line23">line 23</a>
+        <a href="src_services_google_books_google_books.class.js.html">src/services/google_books/google_books.class.js</a>, <a href="src_services_google_books_google_books.class.js.html#line31">line 31</a>
     </li></ul></dd>
     
 
@@ -362,7 +593,7 @@
 
         
 <div class="param-desc">
-    The search results or an error message.
+    The search results from the Google Books API.
 </div>
 
 
@@ -373,7 +604,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;Object></span>
+<span class="param-type">Promise.&lt;object></span>
 
 
     </dd>
@@ -391,7 +622,7 @@
     
 
     
-    <h4 class="name" id="get"><span class="type-signature">(async) </span>get<span class="signature">(id, _params)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+    <h4 class="name" id="get"><span class="type-signature">(async) </span>get<span class="signature">(id, _params)</span><span class="type-signature"> &rarr; {Promise.&lt;object>}</span></h4>
     
 
     
@@ -399,7 +630,7 @@
 
 
 <div class="description">
-    Gets a book by its ID.
+    Retrieves a book by its ID using the Google Books API.
 </div>
 
 
@@ -451,7 +682,7 @@
 
             
 
-            <td class="description last">The ID of the book.</td>
+            <td class="description last">The ID of the book to retrieve.</td>
         </tr>
 
     
@@ -464,7 +695,7 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">object</span>
 
 
             
@@ -474,7 +705,7 @@
 
             
 
-            <td class="description last">Additional parameters (unused).</td>
+            <td class="description last">Additional parameters.</td>
         </tr>
 
     
@@ -515,7 +746,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_google_books_google_books.class.js.html">services/google_books/google_books.class.js</a>, <a href="services_google_books_google_books.class.js.html#line59">line 59</a>
+        <a href="src_services_google_books_google_books.class.js.html">src/services/google_books/google_books.class.js</a>, <a href="src_services_google_books_google_books.class.js.html#line69">line 69</a>
     </li></ul></dd>
     
 
@@ -538,13 +769,42 @@
 
 
 
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        If the book ID is not provided.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
 
 
 <h5>Returns:</h5>
 
         
 <div class="param-desc">
-    The book data or an error message.
+    The book details from the Google Books API.
 </div>
 
 
@@ -555,7 +815,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;Object></span>
+<span class="param-type">Promise.&lt;object></span>
 
 
     </dd>
@@ -583,13 +843,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BookService.html">BookService</a></li><li><a href="GoogleBooksService.html">GoogleBooksService</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createClient">createClient</a></li><li><a href="global.html#getOptions">getOptions</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="GoogleBooksService.html">GoogleBooksService</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createClient">createClient</a></li><li><a href="global.html#down">down</a></li><li><a href="global.html#getGoogleBook">getGoogleBook</a></li><li><a href="global.html#restrictToOwner">restrictToOwner</a></li><li><a href="global.html#up">up</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Sep 18 2024 10:40:46 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Sep 19 2024 11:34:36 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

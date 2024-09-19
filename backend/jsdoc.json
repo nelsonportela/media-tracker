@@ -1,6 +1,6 @@
 {
     "source": {
-      "include": ["src"],
+      "include": ["src", "migrations"],
       "exclude": ["node_modules"]
     },
     "opts": {

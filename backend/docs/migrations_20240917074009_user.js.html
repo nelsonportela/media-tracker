@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: migrations/20240917074009_user.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,41 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: migrations/20240917074009_user.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Run the migrations.
+ *
+ * @param {object} knex - The knex instance.
+ * @returns {Promise&lt;void>}
+ */
+export async function up(knex) {
+  await knex.schema.createTable('users', (table) => {
+    table.increments('id')
+    table.string('email').unique()
+    table.string('password')
+    table.string('name')
+  })
+}
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+/**
+ * Reverse the migrations.
+ *
+ * @param {object} knex - The knex instance.
+ * @returns {Promise&lt;void>}
+ */
+export async function down(knex) {
+  await knex.schema.dropTable('users')
+}</code></pre>
+        </article>
+    </section>
 
 
 

@@ -1,3 +1,15 @@
+/**
+ * Run the migrations.
+ *
+ * This function creates the 'item_status' table with the following columns:
+ * - id: Primary key, auto-incremented
+ * - status_name: String
+ *
+ * It also inserts initial data into the 'item_status' table.
+ *
+ * @param {object} knex - The knex instance.
+ * @returns {Promise<void>}
+ */
 export async function up(knex) {
     await knex.schema.createTable('item_status', table => {
         table.increments('id');
@@ -14,6 +26,14 @@ export async function up(knex) {
     ]);
 }
 
+/**
+ * Reverse the migrations.
+ *
+ * This function drops the 'item_status' table.
+ *
+ * @param {object} knex - The knex instance.
+ * @returns {Promise<void>}
+ */
 export async function down(knex) {
     await knex.schema.dropTable('item_status')
 }
