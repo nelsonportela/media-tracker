@@ -1,18 +1,3 @@
-/**
- * Fetch Google Book details and update the context data.
- *
- * This hook fetches book details from the Google Books API using the provided volume_id.
- * If the volume_id is not provided, it assumes the entry is manual and skips the fetch.
- * The fetched book details are then added to the context data.
- *
- * @param {object} context - The hook context object.
- * @param {object} context.app - The Feathers application object.
- * @param {object} context.data - The data being processed.
- * @param {string} context.data.volume_id - The Google Books volume ID.
- * @param {string} context.data.item_status - The status of the item.
- * @param {object} context.params - The parameters for the service method call.
- * @returns {Promise<object>} The updated context object.
- */
 export const getGoogleBook = async (context) => {
   try {
     const { volume_id, item_status } = context.data;
