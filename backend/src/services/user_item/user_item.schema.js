@@ -13,7 +13,13 @@ export const userItemSchema = {
     user_id: { type: 'number' },
     item_id: { type: 'number' },
     item_type_id: { type: 'number' },
-    status_id: { type: 'number' }
+    status_id: { type: 'number' },
+    rating: {
+      type: 'number',  
+      minimum: 0,  
+      maximum: 2,
+    },
+    favourite: { type: 'boolean' },
   }
 }
 export const userItemValidator = getValidator(userItemSchema, dataValidator)

@@ -15,7 +15,7 @@ import {
 } from './user_item.schema.js'
 import { UserItemService, getOptions } from './user_item.class.js'
 import { userItemPath, userItemMethods } from './user_item.shared.js'
-import { softDelete, disallow } from 'feathers-hooks-common';
+import { softDelete } from 'feathers-hooks-common';
 import { DateTime } from 'luxon';
 
 export * from './user_item.class.js'

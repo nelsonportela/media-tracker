@@ -10,9 +10,15 @@ app.set('knexClient', dbClient);
 
 describe('user_item service', () => {
   let service;
+  let params;
 
   before(() => {
     service = app.service('user_item');
+  });
+
+  beforeEach(() => {
+    const mockUser = { id: 1 };
+    params = { user: mockUser };
   });
 
   it('registered the service', () => {
@@ -20,9 +26,6 @@ describe('user_item service', () => {
   });
 
   it('creates a user_item', async () => {
-    const mockUser = { id: 1 };
-    const params = { user: mockUser };
-
     const userItem = await service.create({
       user_id: 1,
       item_id: 1,
@@ -51,19 +54,20 @@ describe('user_item service', () => {
     const updatedUserItem = await service.patch(1, {
       rating: 4,
       favourite: false
-    });
+    }, params);
 
     assert.equal(updatedUserItem.rating, 4, 'Updated user_item has correct rating');
     assert.equal(updatedUserItem.favourite, false, 'Updated user_item has correct favourite status');
   });
 
   it('removes a user_item', async () => {
-    const removedUserItem = await service.remove(1);
+    const removedUserItem = await service.remove(1, params);
     assert.equal(removedUserItem.id, 1, 'Removed user_item has correct id');
   });
 
   it('finds user_items', async () => {
-    const userItems = await service.find();
-    assert.ok(userItems.length > 0, 'Found user_items');
+    const userItems = await service.find(params);
+
+    assert.ok(userItems.total, 'Found user_items');
   });
 });
