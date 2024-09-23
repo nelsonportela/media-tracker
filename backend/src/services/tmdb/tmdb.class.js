@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const TMDB_API_BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_SEARCH_MOVIE_URL = `${TMDB_API_BASE_URL}/search/movie`;
-const TMDB_SEARCH_TV_URL = `${TMDB_API_BASE_URL}/search/tv`;
 const TMDB_GET_MOVIE_URL = `${TMDB_API_BASE_URL}/movie`;
+const TMDB_SEARCH_TV_URL = `${TMDB_API_BASE_URL}/search/tv`;
 const TMDB_GET_TV_URL = `${TMDB_API_BASE_URL}/tv`;
 
 export class TmdbService {
@@ -50,17 +50,27 @@ export class TmdbService {
       return { error: 'Missing query arguments' };
     }
 
-    const URL = query.type === 'movie' ? TMDB_GET_MOVIE_URL : TMDB_GET_TV_URL;
+    let URL = null
+
+    switch (query.type) {
+      case 'movie':
+        URL = `${TMDB_GET_MOVIE_URL}/${id}`;
+        break;
+      case 'tv':
+        if (!query.season) {
+          URL = `${TMDB_GET_TV_URL}/${id}`;
+        } else {
+          URL = `${TMDB_GET_TV_URL}/${id}/season/${query.season}`;
+        }
+        break;
+      default:
+        return { error: 'Invalid query type' };
+    }
 
 
 
     try {
-      const { data } = await axios.get(`${URL}/${id}`, {
-        params: {
-          query: query.title,
-          include_adult: true,
-          append_to_response: 'credits'
-        },
+      const { data } = await axios.get(URL, {
         headers: {
           Authorization: `Bearer ${process.env.TMDB_TOKEN}`
         }

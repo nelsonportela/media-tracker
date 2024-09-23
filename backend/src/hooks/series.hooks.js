@@ -1,7 +1,10 @@
 export const getTmdbSeries = async (context) => {
     try {
       const { series_id, item_status } = context.data;
-      const { type } = context.params.query;
+      context.params.query = {
+        ...context.params.query,
+        type: 'tv'
+      };
       context.params.item_status = item_status;
   
       delete context.data.series_id;
@@ -68,7 +71,63 @@ export const getTmdbSeries = async (context) => {
       throw new Error(`Failed to fetch TMDB Series details: ${error.message}`);
     }
   }
+
+  export const getTmdbSeason = async (context) => {
+    try {
+      const { parent_id, series_id, season_number } = context.data;
+      delete context.data.parent_id;
+      delete context.data.series_id;
+      delete context.data.season_number;
   
+      if (!series_id) {
+        // Not a tmdb series, just a manual entry;
+        return context;
+      }
+  
+        context.params.query = {
+          ...context.params.query,
+          type: 'tv',
+          season: season_number
+        };
+  
+        let season = await context.app.service('tmdb').get(series_id, context.params);
+  
+        if (season) {
+          const {
+            id,
+            name,
+            overview,
+            air_date,
+            season_number,
+            poster_path
+          } = season;
+  
+          context.data = {
+            ...context.data,
+            series_id: parent_id,
+            tmdb_id: id,
+            tmdb_series_id: series_id,
+            name,
+            overview: overview ? overview.replace(/'/g, "''") : '', // Escape single quotes in description
+            air_date,
+            season_number,
+            poster_path: `https://image.tmdb.org/t/p/w500${poster_path}`,
+          };
+        }
+
+      // return context;
+    } catch (error) {
+      throw new Error(`Failed to fetch TMDB Series details: ${error.message}`);
+    }
+  };
+  
+  export const createSeasons = async (context) => {
+    const { id, tmdb_id, seasons } = context.result;
+    
+    for (let i = 1; i <= seasons; i++) {
+      await context.app.service('seasons').create({parent_id: id, series_id: tmdb_id, season_number: i }, context.params);
+    }
+  }
   export const setUserItem = async (context) => {
   
     const data = {

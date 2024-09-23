@@ -15,8 +15,7 @@ import {
 } from './series.schema.js'
 import { SeriesService, getOptions } from './series.class.js'
 import { seriesPath, seriesMethods } from './series.shared.js'
-import { getTmdbSeries, setUserItem } from '../../hooks/series.hooks.js'
-
+import { getTmdbSeries, createSeasons, setUserItem } from '../../hooks/series.hooks.js'
 
 export * from './series.class.js'
 export * from './series.schema.js'
@@ -54,7 +53,7 @@ export const series = (app) => {
     },
     after: {
       all: [],
-      create: [setUserItem,transaction.end()]
+      create: [createSeasons, setUserItem,transaction.end()]
     },
     error: {
       all: [],

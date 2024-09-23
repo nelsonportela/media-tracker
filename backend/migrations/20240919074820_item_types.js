@@ -9,6 +9,8 @@ export async function up(knex) {
         { type_name: 'books' },
         { type_name: 'movies' },
         { type_name: 'series' },
+        { type_name: 'seasons' },
+        { type_name: 'episodes' },
         { type_name: 'games' }
     ]);
 }

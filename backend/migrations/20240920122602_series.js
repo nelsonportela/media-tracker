@@ -1,6 +1,6 @@
 export async function up(knex) {
   await knex.schema.createTable('series', (table) => {
-    table.increments('id')
+    table.increments('id').onDelete('CASCADE');
     table.integer('tmdb_id').unsigned();
     table.string('name');
     table.string('tagline').nullable();
