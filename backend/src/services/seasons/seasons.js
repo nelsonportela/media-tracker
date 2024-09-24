@@ -1,7 +1,6 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.html
 import { authenticate } from '@feathersjs/authentication'
 import { hooks as schemaHooks } from '@feathersjs/schema'
-// Import feathers-knex hooks
 import { transaction } from '@feathersjs/knex'
 import {
   seasonsDataValidator,
@@ -15,7 +14,7 @@ import {
 } from './seasons.schema.js'
 import { SeasonsService, getOptions } from './seasons.class.js'
 import { seasonsPath, seasonsMethods } from './seasons.shared.js'
-import { getTmdbSeason, setUserItem } from '../../hooks/series.hooks.js'
+import { getTmdbSeason, setUserItem, createEpisodes } from '../../hooks/series.hooks.js'
 
 export * from './seasons.class.js'
 export * from './seasons.schema.js'
@@ -53,7 +52,7 @@ export const seasons = (app) => {
     },
     after: {
       all: [],
-      create: [setUserItem,transaction.end()]
+      create: [setUserItem(4), createEpisodes, transaction.end()]
     },
     error: {
       all: [],

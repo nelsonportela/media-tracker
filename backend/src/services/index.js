@@ -1,3 +1,4 @@
+import { episodes } from './episodes/episodes.js'
 import { seasons } from './seasons/seasons.js'
 import { series } from './series/series.js'
 import { movies } from './movies/movies.js'
@@ -7,6 +8,8 @@ import { googleBooks } from './google_books/google_books.js'
 import { book } from './books/books.js'
 import { user } from './users/users.js'
 export const services = (app) => {
+  app.configure(episodes)
+
   app.configure(seasons)
 
   app.configure(series)

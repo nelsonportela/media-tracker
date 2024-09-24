@@ -53,7 +53,7 @@ export const series = (app) => {
     },
     after: {
       all: [],
-      create: [createSeasons, setUserItem,transaction.end()]
+      create: [setUserItem(3), createSeasons, transaction.end()]
     },
     error: {
       all: [],

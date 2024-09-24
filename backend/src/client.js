@@ -11,6 +11,8 @@ export {}
 
 export {}
 
+export {}
+
 // Import the necessary clients
 import { userClient } from './services/users/users.shared.js'
 import { bookClient } from './services/books/books.shared.js'
@@ -47,6 +49,8 @@ export const createClient = (connection, authenticationOptions = {}) => {
   client.configure(seriesClient)
 
   client.configure(seasonsClient)
+
+  client.configure(episodesClient)
 
   return client
 }
